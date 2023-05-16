@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h2 class="page-header-sm text-center my-5">Add Employee <small class="text-muted">to SocioLens DB</small></h2>
+
+<div class="container">
+    {% if request.method=='GET' %}
+    
+    {% elif errors == ['success'] %}
+    <div class="alert alert-success" role="alert">
+        <p class="mb-0">Successfully added to the database.</p>
+    </div>
+
+    {% elif errors != ['success'] %}
+
+    <div class="alert alert-danger" role="alert">
+        {% for error in errors %}  
+        <p class="mb-0">{{error}}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form action="add-employee" method="post">
+        <div class="form-group mb-3">
+        <div class="row g-3">
+            <div class="col md-4">
+                <label for="firstname">First Name:</label>
+                <input type="text" required class="form-control fw-light" name="firstname" id="firstname" placeholder="Enter first name here">
+            </div>
+            <div class="col md-6">
+                <label for="lastname">Last Name:</label>
+                <input type="text" required class="form-control fw-light" name="lastname" id="lastname" placeholder="Enter last name here">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="role">Role:</label>
+                <input type="text" class="form-control fw-light" name="role" id="role" placeholder="Enter role here">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="uploadpic">Choose a picture:</label>
+                <input type="file" class="form-control-file" id="uploadpic">
+              </div>
+        </div>
+    </div>
+        
+         <button type="submit" class="btn btn-primary">Submit</button>
+        
+    </form>
+</div>
+
+{% endblock content %}

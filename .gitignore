@@ -1,0 +1,4 @@
+**/__pycache__
+/venv
+last_version_requirements.txt
+/alembic/versions/*
