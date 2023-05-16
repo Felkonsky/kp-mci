@@ -2,7 +2,10 @@
 
 ## Virtual Environment
 
+Create virtual environment e.g. venv
+
 - *Activate on Mac:* source venv/bin/activate
+- *Activate on Windows:* .\venv\Scripts\activate
 
 ## Setup and Commands
 
@@ -12,7 +15,7 @@ Install docker desktop in the first place, then:
 
 Open 2nd terminal:
 - docker-compose run app alembic revision --autogenerate -m "migration" (generate migration of db)
-- docker-compose alembic upgrade head (upgrade db to latest version)
+- docker-compose run app alembic upgrade head (upgrade db to latest version)
 
 (if no alembic in filesystem -> docker-compose alembic init alembic)
 
