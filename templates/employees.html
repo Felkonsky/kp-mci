@@ -4,22 +4,24 @@
 
 <h2 class="page-header-sm text-center my-5">Employees <small class="text-muted">Overview</small></h2>
 
-<table class="table">
+<table class="table fw-light">
     <thead>
         <tr>
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Role</th>
+            <th>Picture</th>
         </tr>
     </thead>
     <tbody>
 {% for e in employees%}
     <tr>
-        <td>{{ e[0] }}</td>
-        <td>{{ e[1] }}</td>
-        <td>{{ e[2] }}</td>
-        <td>{{ e[3] }}</td>
+        <td class="align-middle">{{ e[0] }}</td>
+        <td class="align-middle">{{ e[1] }}</td>
+        <td class="align-middle">{{ e[2] }}</td>
+        <td class="align-middle">{{ e[3] }}</td>
+        <td class="align-middle"><img src="{{ e[4] }}" width="100"></td>
     </tr>
     
 {% endfor %}
@@ -27,23 +29,3 @@
 </table>
 
 {% endblock content%}
-
-<!--
-<script>
-    const dbParam = JSON.stringify({table:"customers",limit:20});
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
-  myObj = JSON.parse(this.responseText);
-  let text = "<table border='1'>"
-  for (let x in myObj) {
-    text += "<tr><td>" + myObj[x].name + "</td></tr>";
-  }
-  text += "</table>"
-  document.getElementById("demo").innerHTML = text;
-}
-xmlhttp.open("POST", "json_demo_html_table.php");
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("x=" + dbParam);
-</script>
-
--->

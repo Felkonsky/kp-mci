@@ -1,8 +1,8 @@
 # README
 
-## Virtual Environment
+## Virtual Environment [optional]
 
-Create virtual environment e.g. venv
+Create virtual environment, then activate:
 
 - *Activate on Mac:* source venv/bin/activate
 - *Activate on Windows:* .\venv\Scripts\activate

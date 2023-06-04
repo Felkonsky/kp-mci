@@ -21,7 +21,7 @@
         {% endfor %}
     </div>
     {% endif %}
-    <form action="add-employee" method="post">
+    <form action="add-employee" method="post" enctype="multipart/form-data">
         <div class="form-group mb-3">
         <div class="row g-3">
             <div class="col md-4">
@@ -42,7 +42,7 @@
         <div class="row g-3">
             <div class="col-md-4">
                 <label for="uploadpic">Choose a picture:</label>
-                <input type="file" class="form-control-file" id="uploadpic">
+                <input type="file" class="form-control-file" name="file" id="uploadpic" accept=".jpg,.png,.jpeg">
               </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Column, DateTime, Integer, String, LargeBinary
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -12,16 +12,5 @@ class Employee(Base):
     lastname = Column("lastname", String,  nullable=False)
     time_met = Column("time_met", String)
     place_met = Column("place_met", String)
-    picture = Column("picture", String)
     role = Column("role", String)
-
-"""
-    def __init__(self, firstname, lastname, role):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.role = role
-
-    def __repr__(self):
-        return f"({self.employee_id}) {self.firstname} {self.lastname}, {self.role})"
-
-"""
+    picture = Column("picture", String)
