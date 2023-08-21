@@ -31,6 +31,16 @@ Not necessary with docker setup.
 - *Install:* venv/bin/python -m pip install -r requirements.txt
 - *Generate:* venv/bin/python -m pip freeze > requirements.txt
 
+## To-Do
+
+- [] FaceRecognition on Server - return bounding box + description to client
+- [] Train Function aka Button on WebApp for the Model to adapt recently added/deleted employee pictures
+- [] delete employee, edit employee
+- [] add multiple pictures
+
+
+
 ## misc
+
 
 
