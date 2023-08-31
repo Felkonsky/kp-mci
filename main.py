@@ -5,12 +5,12 @@ import numpy as np
 import math
 
 import PIL.Image as Image
-import base64 
 
 import shutil
-import uvicorn
+# import uvicorn
 
 from fastapi import FastAPI, Request,File, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi.encoders import jsonable_encoder
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -18,9 +18,10 @@ from fastapi_sqlalchemy import DBSessionMiddleware, db
 
 from forms import AddEmployeeForm
 
-from starlette.applications import Starlette
-from starlette.responses import (PlainTextResponse, RedirectResponse,
-                                 HTMLResponse)
+#from starlette.applications import Starlette
+#PlainTextResponse, RedirectResponse
+from starlette.responses import HTMLResponse
+
 from dotenv import load_dotenv, find_dotenv
 from models import Employee
 
@@ -42,7 +43,7 @@ def face_confidence(face_distance, face_match_treshold=0.6):
     else:
         value = (linear_val + ((1.0 - linear_val) * math.pow((linear_val - 0.5) * 2, 0.2))) * 100
         return str(round(value, 2)) + "%"
-    
+
 class FaceRecognition:
     face_locations = []
     face_encodings = []
@@ -84,13 +85,19 @@ class FaceRecognition:
                 name = self.known_face_names[best_match_index]
                 confidence = face_confidence(face_distances[best_match_index])
 
-            self.face_names.append(f"{name} ({confidence})")
+            self.face_names.append(f"{name}")
+            #({confidence})
             print("FR SENT TO CLIENT")
 
             # GET EMPLOYEE WITH SPECIFIC PATH FROM DB AND RETURN ROW FROM DB AS JSON  
-            # employees = db.session.query(Employee).where(Employee.picture == name)
-            # print (employees)
-            return self.face_names
+            #empllist = []
+            with db():
+                for name in self.face_names:
+                    empl = db.session.query(Employee).all()
+                    print(empl)
+                    #print("epmloyees: ", empl)
+
+            return jsonable_encoder(empl)
 
 
 # OTHER SHIT
@@ -108,7 +115,7 @@ async def websocket_endpoint(websocket: WebSocket):
         
         try:
             
-            await websocket.send_text("HI FROM THE SERVER")
+            #await websocket.send_text("HI FROM THE SERVER")
             data = await websocket.receive_bytes()
             #b = base64.b64decode(data)
             img = Image.open(io.BytesIO(data))
@@ -120,7 +127,7 @@ async def websocket_endpoint(websocket: WebSocket):
             break
 
         if nameslist != None:
-            await websocket.send_text(nameslist)
+            await websocket.send_json(nameslist)
         
         
 
@@ -182,9 +189,8 @@ def api_employees():
 ###################################################################
 # run as local server without container (pgadmin still necessary) #
 ###################################################################
-
-
-"""
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-"""
+#                                                                 #
+# if __name__ == "__main__":                                      #
+# uvicorn.run(app, host="0.0.0.0", port=8000)                     #
+#                                                                 #
+###################################################################
